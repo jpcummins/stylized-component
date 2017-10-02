@@ -5,10 +5,6 @@ export interface ThemeProps {
   theme?: Style;
 }
 
-function isTheme(prop: any): prop is Style {
-  return (<Style>prop).colors !== undefined;
-}
-
 export interface StyledComponent<StyleT = {}, PropsT = {}, StateT = {}> {
   theme: StyleT;
   globalTheme: Style;
