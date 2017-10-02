@@ -1,23 +1,34 @@
 import * as React from 'react';
-import { GlobalStyle, DefaultGlobalStyle } from './GlobalStyle';
+import { Style, DefaultStyle } from './Style';
 
-export interface StyledComponentProps {
-  globalStyle: GlobalStyle;
-  overrides: { [index:string] : any };
+export interface ThemeProps {
+  theme?: Style;
 }
 
-export interface StyledComponent<Style = {}, Props extends StyledComponentProps = { globalStyle: GlobalStyle, overrides: {} }, State = {}> {
-  style: Style;
-  setStyle(global: GlobalStyle, override?: Style): Style;
+function isTheme(prop: any): prop is Style {
+  return (<Style>prop).colors !== undefined;
+}
+
+export interface StyledComponent<StyleT = {}, PropsT = {}, StateT = {}> {
+  theme: StyleT;
+  globalTheme: Style;
+  props: Readonly<{ children?: React.ReactNode }> & Readonly<PropsT> & ThemeProps;
+  setTheme(global: Style, override?: StyleT): StyleT;
 };
 
-export class StyledComponent<Style, Props extends StyledComponentProps, State> extends React.Component<Props, State> implements StyledComponent {
-  style: Style;
+export class StyledComponent<StyleT, PropsT, StateT> extends React.Component<PropsT, StateT> implements StyledComponent {
+  theme: StyleT;
+  globalTheme: Style;
 
-  constructor(props?: Props, context?: any) {
+  constructor(props?: PropsT, context?: any) {
     super(props, context);
-    const className = this.constructor.toString()
-    const override = this.props.overrides ? this.props.overrides[className] : undefined;
-    this.style = this.setStyle(this.props.globalStyle || DefaultGlobalStyle, override);
+    this.globalTheme = this.props.theme ? this.props.theme : DefaultStyle;
+    this.theme = this.setTheme(this.globalTheme);
+  }
+  componentWillUpdate(nextProps:any) {
+    if (nextProps.theme !== undefined && nextProps.theme !== this.globalTheme) {
+      this.globalTheme = nextProps.theme;
+      this.theme = this.setTheme(nextProps.theme, nextProps.overrideTheme);
+    }
   }
 }
