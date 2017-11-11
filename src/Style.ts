@@ -1,4 +1,4 @@
-export interface Style {
+export interface ThemeStyle {
   colors: {
     absolute: {
       red: string;
@@ -17,10 +17,10 @@ export interface Style {
       warning: string;
       danger: string;
     },
-  },
+  };
   fontSize: string;
   borderRadius: string;
-};
+}
 
 const absoluteColors = {
   red: '#d9534f',
@@ -41,11 +41,11 @@ const semanticColors = {
   danger: absoluteColors.red,
 };
 
-export const DefaultStyle: Style = {
+export const defaultStyle: ThemeStyle = {
   colors: {
     absolute: absoluteColors,
     semantic: semanticColors,
   },
   fontSize: '16px',
   borderRadius: '4px',
-}
+};

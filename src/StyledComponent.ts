@@ -1,24 +1,24 @@
 import * as React from 'react';
-import { Style, DefaultStyle } from './Style';
+import { ThemeStyle, defaultStyle } from './Style';
 
 export interface ThemeProps {
-  theme?: Style;
+  theme?: ThemeStyle;
 }
 
-export interface StyledComponent<StyleT = {}, PropsT = {}, StateT = {}> {
-  theme: StyleT;
-  globalTheme: Style;
-  props: Readonly<{ children?: React.ReactNode }> & Readonly<PropsT> & ThemeProps;
-  setTheme(global: Style, override?: StyleT): StyleT;
-};
+export interface StyledComponent<Style = {}, Props = {}, State = {}> {
+  theme: ThemeStyle;
+  globalTheme: ThemeStyle;
+  props: Readonly<{ children?: React.ReactNode }> & Readonly<Props> & ThemeProps;
+  setTheme(global: ThemeStyle, override?: Style): ThemeStyle;
+}
 
-export class StyledComponent<StyleT, PropsT, StateT> extends React.Component<PropsT, StateT> implements StyledComponent {
-  theme: StyleT;
-  globalTheme: Style;
+export class StyledComponent<Style, Props, State> extends React.Component<Props, State> {
+  theme: ThemeStyle;
+  globalTheme: ThemeStyle;
 
-  constructor(props?: PropsT, context?: any) {
+  constructor(props?: Props, context?: any) {
     super(props, context);
-    this.globalTheme = this.props.theme ? this.props.theme : DefaultStyle;
+    this.globalTheme = this.props.theme ? this.props.theme : defaultStyle;
     this.theme = this.setTheme(this.globalTheme);
   }
   componentWillUpdate(nextProps:any) {

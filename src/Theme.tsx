@@ -6,7 +6,6 @@ export interface ThemeProps {
 }
 
 function cloneElementWithTheme(child:React.ReactChild, theme: ThemeProps): React.ReactElement<any> {
-  // Hackity hack hack - If the child specifys a theme, respect it.
   const element = child as React.ReactElement<any>;
   const childThemeProp = element.props['theme'] as ThemeProps;
   const childTheme = childThemeProp ? childThemeProp : theme;
