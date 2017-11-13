@@ -1,4 +1,4 @@
-export interface ThemeStyle {
+export interface Theme {
   colors: {
     absolute: {
       red: string;
@@ -41,7 +41,7 @@ const semanticColors = {
   danger: absoluteColors.red,
 };
 
-export const defaultStyle: ThemeStyle = {
+export const defaultTheme: Theme = {
   colors: {
     absolute: absoluteColors,
     semantic: semanticColors,
