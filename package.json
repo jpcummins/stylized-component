@@ -1,6 +1,6 @@
 {
   "name": "stylized-component",
-  "version": "0.0.4",
+  "version": "0.0.7",
   "description": "A design prototype",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -14,12 +14,15 @@
   },
   "author": "J.P. Cummins <jp@convoy.com>",
   "dependencies": {
-    "@types/lodash": "^4.14.85",
-    "@types/prop-types": "^15.5.2",
+    "@types/reflect-metadata": "0.0.5",
     "lodash": "^4.17.4",
-    "react": "^16.0.0"
+    "prop-types": "^15.5.2",
+    "react": "^16.0.7",
+    "reflect-metadata": "^0.1.10"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.85",
+    "@types/prop-types": "^15.5.2",
     "@types/react": "^16.0.7",
     "tslint-config-airbnb": "^5.3.0",
     "typescript": "^2.5.3"
