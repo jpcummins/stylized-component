@@ -3,9 +3,9 @@ import * as PropTypes from 'prop-types';
 import { Component, ReactNode } from 'react';
 
 import { ThemeContext } from './ThemeProvider';
-import { Theme, ThemeStyle } from './Theme';
+import { Theme, ThemeStyle } from '../Theme';
 
-export abstract class StyledComponent<Style, Props extends Style, State> 
+export abstract class StylizedComponent<Style, Props extends Style, State> 
   extends Component<Props, State> {
   static contextTypes = {
     theme: PropTypes.object,
@@ -22,7 +22,12 @@ export abstract class StyledComponent<Style, Props extends Style, State>
     // 1. Explicity defined props
     // 2. Overrides defined in context.theme
     const contextStyle = _.get(context, ['theme', this.styleId]) as ThemeStyle;
-    this.style = _.extend(contextStyle, props);
+    this.style = _.extend({}, contextStyle, props);
+  }
+
+  componentWillReceiveProps(nextProps: Props) {
+    const contextStyle = _.get(this.context, ['theme', this.styleId]) as ThemeStyle;
+    this.style = _.extend({}, contextStyle, nextProps);
   }
 }
 

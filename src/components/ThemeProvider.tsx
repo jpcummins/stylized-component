@@ -1,13 +1,16 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { Theme } from './Theme';
+import { Theme, Themes } from '../Theme';
+import { blue, green } from '../themes';
+
+const themes: Themes = { blue, green };
 
 export interface ThemeContext {
   theme: Theme;
 }
 
 export interface ThemeProps {
-  theme: Theme;
+  theme: string;
 }
 
 export type Props = { children : React.ReactNode} & ThemeProps;
@@ -21,13 +24,17 @@ export class ThemeProvider extends React.Component<Props, {}> {
 
   constructor(props: Props, context: ThemeContext) {
     super(props, context);
-    this.theme = props.theme;
+    this.theme = themes[props.theme];
   }
   
   getChildContext(): ThemeContext {
     return {
       theme: this.theme,
     };
+  }
+
+  componentWillReceiveProps(nextProps: Props) {
+    this.theme = themes[nextProps.theme];
   }
 
   render() {

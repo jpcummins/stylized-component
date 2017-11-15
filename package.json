@@ -1,6 +1,6 @@
 {
   "name": "stylized-component",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "A design prototype",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -14,9 +14,11 @@
   },
   "author": "J.P. Cummins <jp@convoy.com>",
   "dependencies": {
+    "@types/color": "^2.0.0",
     "@types/lodash": "^4.14.85",
     "@types/prop-types": "^15.5.2",
     "@types/react": "^16.0.7",
+    "color": "^2.0.1",
     "lodash": "^4.17.4",
     "prop-types": "^15.5.2",
     "react": "^16.0.7"
