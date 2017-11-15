@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Theme } from './Theme';
 
-export interface ThemeProviderContext {
+export interface ThemeContext {
   theme: Theme;
 }
 
@@ -10,16 +10,23 @@ export interface ThemeProps {
   theme: Theme;
 }
 
-export type ThemeProviderProps = { children : React.ReactNode} & ThemeProps;
+export type Props = { children : React.ReactNode} & ThemeProps;
 
-export class ThemeProvider extends React.Component<ThemeProviderProps, {}> {
+export class ThemeProvider extends React.Component<Props, {}> {
   static childContextTypes = {
     theme: PropTypes.object,
   };
+
+  theme: Theme;
+
+  constructor(props: Props, context: ThemeContext) {
+    super(props, context);
+    this.theme = props.theme;
+  }
   
-  getChildContext(): ThemeProviderContext {
+  getChildContext(): ThemeContext {
     return {
-      theme: this.props.theme,
+      theme: this.theme,
     };
   }
 

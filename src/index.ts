@@ -1,3 +1,3 @@
 export { Theme } from './Theme';
-export { ThemedComponent, themeKey } from './ThemedComponent';
+export { StyledComponent, styleId } from './StyledComponent';
 export { ThemeProvider, ThemeProps } from './ThemeProvider';
